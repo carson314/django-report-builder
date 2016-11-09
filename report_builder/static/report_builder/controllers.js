@@ -181,6 +181,7 @@ reportBuilderApp.controller('LeftCtrl', function($scope, $routeParams, $mdSidena
 
 reportBuilderApp.controller('FieldsCtrl', function($scope, $mdSidenav, reportService) {
   $scope.load_fields = function(field) {
+    console.log(field);
     data = {
       "model": field.model_id,
       "path": field.path,
@@ -193,6 +194,8 @@ reportBuilderApp.controller('FieldsCtrl', function($scope, $mdSidenav, reportSer
       $scope.fields = result;
     });
     reportService.getRelatedFields(data).then(function(result) {
+      console.log("load_fields");
+      console.log(result);
       field.related_fields = result;
       var help_text = 'This model is included in report builder.';
       if (result[0].included_model == false) {
@@ -211,7 +214,10 @@ reportBuilderApp.controller('FieldsCtrl', function($scope, $mdSidenav, reportSer
       "field": field.field_name
     }
     reportService.getRelatedFields(data).then(function(result) {
+      console.log("toogle_related_fields");
+      console.log(data);
       field.related_fields = result;
+      console.log(field);
     });
   };
 
